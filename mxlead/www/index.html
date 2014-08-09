@@ -1,48 +1,168 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
 
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
-        
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <title>MXLead</title>
     <link href="jquery-mobile/jquery.mobile-1.4.3.min.css" rel="stylesheet" type="text/css">
+    <link href="jquery-mobile/jquery.mobile.inline-png-1.4.3.min.css" rel="stylesheet" type="text/css">
     <script src="jquery-mobile/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/jquery.mobile-1.4.3.min.js" type="text/javascript"></script>
-</head>
+    
+	
+	<script>
+
+
+	function logOut(){
+		
+		 localStorage.setItem("login", "");
+	     localStorage.setItem("user", "");
+
+		$.mobile.changePage($("#login"));
+
+	}
+
+
+
+	function getSurvey(){
+		
+	
+		
+	var user=localStorage.getItem("user");
+	
+	
+	$.ajax({
+  	
+			url : "http://fajjemobile.info/mxlead/WebService/getList.php",
+				type: "GET",
+				async: true,
+				data: {user:user},
+	   		    success:function(response){
+                       
+					   alert(response);
+					  
+					  var list=response.split(",");
+	
+	for(var i =1;i<list.length;i++){
+	
+	
+	
+	$("#nameList").append($('<li/>', {    //here appending `<li>`
+    
+}).append($('<a/>', {    //here appending `<a>` into `<li>`
+    'rel':'external',
+  'data-transition':'pop',
+     'text': list[i]
+})));
+	
+	}
+					  
+					  
+					  	$('#nameList').listview('refresh');
+            $.mobile.loading( "hide" );
+			    },
+                error: function (request, status, error) {
+					$.mobile.loading( "hide" );
+                    alert("Error, Connect to network");
+                } 
+					   
+	            
+	
+	});
+	
+	}
+
+
+	
+	$(document).ready(function () {
+	
+	if(localStorage.getItem("login")!="Yes"){
+
+	$.mobile.changePage($("#login"));		
+		}else{
+			$.mobile.loading( "show");
+			getSurvey();
+			
+			
+			}
+			
+				
+});
+
+
+	
+	
+	function loginCheck(){
+	var userid=$('#username').val();
+	var pass=$('#password').val();
+	
+	
+	
+	$.ajax({
+  	
+			url : "http://fajjemobile.info/mxlead/WebService/checkLogin.php",
+				type: "GET",
+				async: true,
+				data: {user:userid,password:pass},
+	   		    success:function(response){
+                       
+					   if(response=="Yes"){
+						   localStorage.setItem("login", "Yes");
+						   localStorage.setItem("user", userid);
+						   $.mobile.changePage($("#surveyList"),"slide");
+						   getSurvey();
+						   	
+						   }else{
+$('#username').val="";							   
+							   }
+	$('#password').val="";
+	            }
+	
+	});
+	
+	}
+    </script>
+    </head>
     <body>
+<div data-role="page" id="surveyList">
+      <div data-role="header">
+    <h1>MX Security</h1>
+    <a href="#" data-role="button" data-icon="delete" data-iconpos="left" onclick="logOut()">Logout</a><a href="#" data-role="button" data-icon="plus" data-iconpos="notext">Button</a>
+    
+  </div>
+      <div data-role="content">
+        <ul data-role="listview" id = "nameList">
+          
+        </ul>
+      </div>
+      <div data-role="footer">
+    <h4>SilverSages Studio</h4>
+  </div>
+    </div>
+
 <div data-role="page" id="login">
-  <div data-role="header">
-    <h1>Header</h1>
+      <div data-role="header">
+    <h1>MX Security</h1>
   </div>
-  <div data-role="content">Content</div>
-  <div data-role="footer">
-    <h4>Footer</h4>
+      <div data-role="content">
+    <div data-role="fieldcontain">
+          <input type="text" name="username" id="username" style="border-radius:0" value="" placeholder="Enter Username"  data-clear-btn="true" required/>
+          <input type="password" name="password" id="password" value="" placeholder="Enter Password"  data-clear-btn="true"  required/>
+          <button data-icon="lock" onclick="loginCheck()">Login</button>
+          <button data-icon="delete">Cancel</button>
+          <div> </div>
+        </div>
   </div>
-</div>
+      <div data-role="footer" data-position="fixed">
+    <h4>SilverSages Studio</h4>
+  </div>
+    </div>
+
+
 <script type="text/javascript" src="cordova.js"></script>
-        
 </body>
 </html>
