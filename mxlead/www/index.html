@@ -44,7 +44,7 @@
 				//	   alert(response);
 					  
 					  var list=response.split(",");
-	
+	$("#nameList").empty();
 	for(var i =1;i<list.length;i++){
 	
 	
@@ -151,21 +151,20 @@ $('#username').val="";
         </div>
   </div>
     </div>
-<div data-role="footer" data-position="fixed">
-      <h4>SilverSages Studio</h4>
-    </div>
 </div>
 <div data-role="page" id="insert">
       <div data-role="header">
     <h1>MX Security</h1>
+       <a href="#surveyList" data-role="button" data-icon="arrow-l" data-iconpos="notext">Button</a>
   </div>
       <div data-role="content">
+      <form>
     <div data-role="fieldcontain">
           <input type="text" name="name" id="name"  value="" placeholder="Enter Name"  data-clear-btn="true" required/>
           <input type="tel" name="tel" id="tel" value="" placeholder="Enter Tel"  data-clear-btn="true"  required/>
           <textarea name="address" id="address" placeholder="Enter Address"></textarea>
           <input type="text" name="city" id="city"  value="" placeholder="Enter City"  data-clear-btn="true" required/>
-          <input type="number" name="zip" id="zip" value="" placeholder="Enter Zip"  data-clear-btn="true"  required/>
+          <input type="tel" name="zip" id="zip" value="" placeholder="Enter Zip"  data-clear-btn="true"  required/>
           <input type="email" name="email" id="email"  value="" placeholder="Enter Email"  data-clear-btn="true" required/>
           <select name="interest" id="interest">
         <option value="">Select Interest</option>
@@ -180,7 +179,7 @@ $('#username').val="";
         <option value="Yes">Yes</option>
         <option value="No">No</option>
       </select>
-          <input type="number" name="rate" id="rate" value="" placeholder="Enter Rate"  data-clear-btn="true"  required/>
+          <input type="tel" name="rate" id="rate" value="" placeholder="Enter Rate"  data-clear-btn="true"  required/>
           <select name="systemQuoted" id="systemQuoted">
         <option value="">System Quoted</option>
         <option value="Lynx" >Lynx</option>
@@ -190,15 +189,14 @@ $('#username').val="";
         <option value="Hardwired" >Hardwired</option>
       </select>
       
-   <input type="date" name="cdate" id="cdate" value="" placeholder="Enter Next Contact Date"  data-clear-btn="true"  required/>
+   <input type="text" name="cdate" id="cdate" value="" placeholder="Enter Next Contact Date"  data-clear-btn="true"  required/>
 
           <button data-icon="edit" onclick="insert()">Submit</button>
           <button data-icon="delete">Cancel</button>
         </div>
+        </form>
   </div>
-<div data-role="footer" data-position="fixed">
-      <h4>SilverSages Studio</h4>
-    </div>
+
     </div>
 <script type="text/javascript" src="cordova.js"></script>
 </body>
