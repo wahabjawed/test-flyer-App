@@ -12,9 +12,7 @@
     <link href="jquery-mobile/jquery.mobile.inline-png-1.4.3.min.css" rel="stylesheet" type="text/css">
     <script src="jquery-mobile/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="jquery-mobile/jquery.mobile-1.4.3.min.js" type="text/javascript"></script>
-    
-	
-	<script>
+    <script>
 
 
 	function logOut(){
@@ -43,7 +41,7 @@
 				data: {user:user},
 	   		    success:function(response){
                        
-					   alert(response);
+				//	   alert(response);
 					  
 					  var list=response.split(",");
 	
@@ -131,19 +129,15 @@ $('#username').val="";
 <div data-role="page" id="surveyList">
       <div data-role="header">
     <h1>MX Security</h1>
-    <a href="#" data-role="button" data-icon="delete" data-iconpos="left" onclick="logOut()">Logout</a><a href="#" data-role="button" data-icon="plus" data-iconpos="notext">Button</a>
-    
-  </div>
+    <a href="#" data-role="button" data-icon="delete" data-iconpos="left" onclick="logOut()">Logout</a><a href="#insert" data-role="button" data-icon="plus" data-iconpos="notext">Button</a> </div>
       <div data-role="content">
-        <ul data-role="listview" id = "nameList">
-          
+        <ul data-role="listview" data-filter="true" data-filter-placeholder="Search Records..." id = "nameList">
         </ul>
-      </div>
-      <div data-role="footer">
+  </div>
+      <div data-role="footer" data-position="fixed">
     <h4>SilverSages Studio</h4>
   </div>
     </div>
-
 <div data-role="page" id="login">
       <div data-role="header">
     <h1>MX Security</h1>
@@ -154,15 +148,58 @@ $('#username').val="";
           <input type="password" name="password" id="password" value="" placeholder="Enter Password"  data-clear-btn="true"  required/>
           <button data-icon="lock" onclick="loginCheck()">Login</button>
           <button data-icon="delete">Cancel</button>
-          <div> </div>
         </div>
   </div>
-      <div data-role="footer" data-position="fixed">
-    <h4>SilverSages Studio</h4>
-  </div>
     </div>
+<div data-role="footer" data-position="fixed">
+      <h4>SilverSages Studio</h4>
+    </div>
+</div>
+<div data-role="page" id="insert">
+      <div data-role="header">
+    <h1>MX Security</h1>
+  </div>
+      <div data-role="content">
+    <div data-role="fieldcontain">
+          <input type="text" name="name" id="name"  value="" placeholder="Enter Name"  data-clear-btn="true" required/>
+          <input type="tel" name="tel" id="tel" value="" placeholder="Enter Tel"  data-clear-btn="true"  required/>
+          <textarea name="address" id="address" placeholder="Enter Address"></textarea>
+          <input type="text" name="city" id="city"  value="" placeholder="Enter City"  data-clear-btn="true" required/>
+          <input type="number" name="zip" id="zip" value="" placeholder="Enter Zip"  data-clear-btn="true"  required/>
+          <input type="email" name="email" id="email"  value="" placeholder="Enter Email"  data-clear-btn="true" required/>
+          <select name="interest" id="interest">
+        <option value="">Select Interest</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+          <select name="haveSystem" id="haveSystem">
+        <option value="">Have System</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+          <input type="number" name="rate" id="rate" value="" placeholder="Enter Rate"  data-clear-btn="true"  required/>
+          <select name="systemQuoted" id="systemQuoted">
+        <option value="">System Quoted</option>
+        <option value="Lynx" >Lynx</option>
+        <option value="Simon" >Simon</option>
+        <option value="2gig">2gig</option>
+        <option value="DSC" >DSC</option>
+        <option value="Hardwired" >Hardwired</option>
+      </select>
+      
+   <input type="date" name="cdate" id="cdate" value="" placeholder="Enter Next Contact Date"  data-clear-btn="true"  required/>
 
-
+          <button data-icon="edit" onclick="insert()">Submit</button>
+          <button data-icon="delete">Cancel</button>
+        </div>
+  </div>
+<div data-role="footer" data-position="fixed">
+      <h4>SilverSages Studio</h4>
+    </div>
+    </div>
 <script type="text/javascript" src="cordova.js"></script>
 </body>
 </html>
