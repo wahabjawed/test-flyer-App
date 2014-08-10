@@ -8,7 +8,7 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 		$user = $_GET['user'];
 		
 			
-					$query = "select d.name from data d, user u where u.user_id = d.datauserid and u.username = '$user'";
+					$query = "select * from data  where datauserid  = '$user'";
 			$result = mysqli_query($con,$query)
 			or die ("Couldn’t execute query.");
 

@@ -15,8 +15,8 @@ include 'headers/connect_database.php';
 			or die ("Couldn’t execute query.");
 		
 			if(mysqli_num_rows($result)>0){
-			
-			$data="Yes";
+			$row=mysqli_fetch_array($result);
+			$data=$row['user_id'];
 			
 			}else{
 			
