@@ -6,18 +6,18 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 include 'headers/connect_database.php';      
 		
 		
-		$name = $_GET['name'];
-		$tel = $_GET['tel'];
-		$address = $_GET['address'];
-		$zip = $_GET['zip'];
-		$city = $_GET['city'];
-		$email = $_GET['email'];
-		$interest = $_GET['interest'];
-		$haveSystem = $_GET['haveSystem'];
-		$rate = $_GET['rate'];
-		$cdate = $_GET['cdate'];
-		$systemQuoted = $_GET['systemQuoted'];
-		$user_id = $_GET['huser_id'];
+		$name = $_POST['name'];
+		$tel = $_POST['tel'];
+		$address = $_POST['address'];
+		$zip = $_POST['zip'];
+		$city = $_POST['city'];
+		$email = $_POST['email'];
+		$interest = $_POST['interest'];
+		$haveSystem = $_POST['haveSystem'];
+		$rate = $_POST['rate'];
+		$cdate = $_POST['cdate'];
+		$systemQuoted = $_POST['systemQuoted'];
+		$user_id = $_POST['huser_id'];
 		
 		
 					$query = "INSERT INTO `data`(`name`, `tel`, `address`, `city`, `zipcode`, `email`, `interest`, `havesystem`, `cdate`, `rate`, `systemquote`, `datauserid`) VALUES ('$name','$tel','$address','$city','$zip','$email','$interest','$haveSystem','$cdate','$rate','$systemQuoted','$user_id')";
