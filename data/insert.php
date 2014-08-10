@@ -17,7 +17,7 @@ include 'headers/connect_database.php';
 		$rate = $_GET['rate'];
 		$cdate = $_GET['cdate'];
 		$systemQuoted = $_GET['systemQuoted'];
-		$user_id = $_GET['user_id'];
+		$user_id = $_GET['huser_id'];
 		
 		
 					$query = "INSERT INTO `data`(`name`, `tel`, `address`, `city`, `zipcode`, `email`, `interest`, `havesystem`, `cdate`, `rate`, `systemquote`, `datauserid`) VALUES ('$name','$tel','$address','$city','$zip','$email','$interest','$havesystem','$cdate','$rate','$systemquote','$user_id')";
