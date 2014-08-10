@@ -20,7 +20,7 @@ include 'headers/connect_database.php';
 		$user_id = $_GET['huser_id'];
 		
 		
-					$query = "INSERT INTO `data`(`name`, `tel`, `address`, `city`, `zipcode`, `email`, `interest`, `havesystem`, `cdate`, `rate`, `systemquote`, `datauserid`) VALUES ('$name','$tel','$address','$city','$zip','$email','$interest','$havesystem','$cdate','$rate','$systemquote','$user_id')";
+					$query = "INSERT INTO `data`(`name`, `tel`, `address`, `city`, `zipcode`, `email`, `interest`, `havesystem`, `cdate`, `rate`, `systemquote`, `datauserid`) VALUES ('$name','$tel','$address','$city','$zip','$email','$interest','$haveSystem','$cdate','$rate','$systemQuoted','$user_id')";
 			$result = mysqli_query($con,$query)
 			or die ("Couldn’t execute query.");
 		
