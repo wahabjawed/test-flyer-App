@@ -185,7 +185,10 @@ var postData = $('#ajaxform').serializeArray();
   </div>
       <div data-role="content">
     <div data-role="fieldcontain">
-          <input type="text" name="username" id="username" style="border-radius:0" value="" placeholder="Enter Username"  data-clear-btn="true" required/>
+          <center>
+        <img id="lock" src="img/SessionLock.png">
+      </center>
+          <input type="text" name="username" id="username" value="" placeholder="Enter Username"  data-clear-btn="true" required/>
           <input type="password" name="password" id="password" value="" placeholder="Enter Password"  data-clear-btn="true"  required/>
           <button data-icon="lock" onclick="loginCheck()">Login</button>
           <button data-icon="delete">Cancel</button>
