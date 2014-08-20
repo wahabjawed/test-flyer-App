@@ -234,7 +234,7 @@ function getData(id){
 						$('#ratev').val(fetchData[10]);
 						$('#havev option[value='+fetchData[8]+']').attr('selected', 'selected');
 						$('#systemv option[value='+fetchData[11]+']').attr('selected', 'selected');
-						
+						$('#statusv').val(fetchData[12]);
             			$.mobile.loading( "hide" );
 					  	$.mobile.changePage($("#viewData"));
 			
@@ -342,9 +342,9 @@ function getData(id){
         <center><h3 style="margin-top:0px" >Update Status</h3></center>
         <select name="status" id="status">
               <option value="">Select Status</option>
-              <option value="Lynx" >Lynx</option>
-              <option value="Simon" >Simon</option>
-              <option value="2gig">2gig</option>
+              <option value="Still Undecided" >Still Undecided</option>
+              <option value="Sold" >Sold</option>
+              <option value="No Show">No Show</option>
             </select>
         <input type="button" data-icon="edit" onclick="updateStatus()" value="Submit" />
       </div>
@@ -352,12 +352,12 @@ function getData(id){
     <form name="updateform" id="updateform" action="#" method="POST">
           <div data-role="fieldcontain">
        	<input type="hidden" name="dataid" id="dataidv" value="" />
-        <input type="text" name="name" id="namev"  value="" placeholder="Enter Name"  data-clear-btn="true" readonly/>
-        <input type="tel" name="tel" id="telv" value="" placeholder="Enter Tel"  data-clear-btn="true"  readonly/>
+        <input type="text" name="name" id="namev"  value="" placeholder="Enter Name" readonly/>
+        <input type="tel" name="tel" id="telv" value="" placeholder="Enter Tel"   readonly/>
         <textarea name="address" id="addressv" placeholder="Enter Address" readonly></textarea>
-        <input type="text" name="city" id="cityv"  value="" placeholder="Enter City"  data-clear-btn="true" readonly/>
-        <input type="tel" name="zip" id="zipv" value="" placeholder="Enter Zip"  data-clear-btn="true"  readonly/>
-        <input type="email" name="email" id="emailv"  value="" placeholder="Enter Email"  data-clear-btn="true" readonly/>
+        <input type="text" name="city" id="cityv"  value="" placeholder="Enter City"  readonly/>
+        <input type="tel" name="zip" id="zipv" value="" placeholder="Enter Zip"   readonly/>
+        <input type="email" name="email" id="emailv"  value="" placeholder="Enter Email"   readonly/>
         <select name="interestv" id="interestv" disabled>
               <option value="">Select Interest</option>
               <option value="1">1</option>
@@ -371,7 +371,7 @@ function getData(id){
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
-        <input type="text" onfocus="(this.type='number')"  onblur="(this.type='text')" name="rate" id="ratev" value="" placeholder="Enter Rate"  data-clear-btn="true"  readonly/>
+        <input type="text" onfocus="(this.type='number')"  onblur="(this.type='text')" name="rate" id="ratev" value="" placeholder="Enter Rate"   readonly/>
         <select name="systemv" id="systemv" disabled>
               <option value="">System Quoted</option>
               <option value="Lynx" >Lynx</option>
@@ -380,7 +380,8 @@ function getData(id){
               <option value="DSC" >DSC</option>
               <option value="Hardwired" >Hardwired</option>
             </select>
-        <input type="text" name="cdate" id="cdatev" value="" placeholder="Enter Next Contact Date"  data-clear-btn="true"  readonly/>
+        <input type="text" name="cdate" id="cdatev" value="" placeholder="Enter Next Contact Date"  readonly/>
+           <input type="text" name="statusv" id="statusv" value="" placeholder="No Status"   readonly/>
       </div>
         </form>
   </div>
