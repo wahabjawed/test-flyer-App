@@ -50,14 +50,16 @@
 	$("#nameList").empty();
 	for(var i =1;i<list.length;i++){
 	
-	
+	var listData=list[i].split("#");
 	
 	$("#nameList").append($('<li/>', {    //here appending `<li>`
     
 }).append($('<a/>', {    //here appending `<a>` into `<li>`
-    'rel':'external',
+  'href':'#',
+  'rel':'external',
   'data-transition':'pop',
-     'text': list[i]
+  'text': listData[1],
+  'onclick':'getData('+listData[0]+')'
 })));
 	
 	}
@@ -76,6 +78,18 @@
 	});
 	
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	
@@ -135,6 +149,7 @@ $('#username').val="";
 	}
 	
 	
+
 	
 		function insert(){
 
@@ -162,6 +177,79 @@ var postData = $('#ajaxform').serializeArray();
     });
   
 	}
+	
+	
+	
+		function updateStatus(){
+
+
+var dataID = $('#dataidv').val();
+var status = $('#status').val();
+ 
+  
+   
+    $.ajax(
+    {
+        url : "http://fajjemobile.info/mxlead/WebService/update.php",
+        type: "GET",
+		async: true,
+        data : {ID:dataID,status:status},
+        success:function(data, textStatus, jqXHR) 
+        {
+
+           if(data=="Yes"){
+			   $('#popupUpdate').popup('close');
+			   }
+        },
+        error: function (request, status, error)  
+        {
+            alert("Coundn't connect to the internet");     
+        }
+    });
+  
+	}
+	
+	
+function getData(id){	
+		
+	$.ajax({
+  	
+			url : "http://fajjemobile.info/mxlead/WebService/getdata.php",
+				type: "GET",
+				async: true,
+				data: {ID:id},
+	   		    success:function(response){
+                       
+					   //alert(response);
+					  var fetchData=response.split(",");
+						$('#dataidv').val(fetchData[0]);
+						$('#namev').val(fetchData[1]);
+						$('#telv').val(fetchData[2]);
+						$('#addressv').val(fetchData[3]);
+						$('#cityv').val(fetchData[4]);
+						$('#zipv').val(fetchData[5]);
+						$('#emailv').val(fetchData[6]);
+						$('#interestv option:eq('+fetchData[7]+')').prop('selected', true);
+						$('#cdatev').val(fetchData[9]);
+						$('#ratev').val(fetchData[10]);
+						$('#havev option[value='+fetchData[8]+']').attr('selected', 'selected');
+						$('#systemv option[value='+fetchData[11]+']').attr('selected', 'selected');
+						
+            			$.mobile.loading( "hide" );
+					  	$.mobile.changePage($("#viewData"));
+			
+			    },
+                error: function (request, status, error) {
+					$.mobile.loading( "hide" );
+                    alert("Couldn't connect to the internet");
+                } 
+					   
+	            
+	
+	});
+	
+	
+}
 	
 	
     </script>
@@ -202,7 +290,7 @@ var postData = $('#ajaxform').serializeArray();
 <div data-role="page" id="insert">
       <div data-role="header">
     <h1>MX Security</h1>
-    <a href="#surveyList" data-role="button" data-icon="arrow-l" data-iconpos="notext">Button</a> </div>
+    <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" onclick="history.back();">Button</a> </div>
       <div data-role="content">
     <form name="ajaxform" id="ajaxform" action="#insert" method="POST">
           <div data-role="fieldcontain">
@@ -225,7 +313,7 @@ var postData = $('#ajaxform').serializeArray();
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
-        <input type="tel" name="rate" id="rate" value="" placeholder="Enter Rate"  data-clear-btn="true"  required/>
+        <input type="text" onfocus="(this.type='number')"  onblur="(this.type='text')" name="rate" id="rate" value="" placeholder="Enter Rate"  data-clear-btn="true"  required/>
         <select name="systemQuoted" id="systemQuoted">
               <option value="">System Quoted</option>
               <option value="Lynx" >Lynx</option>
@@ -240,6 +328,64 @@ var postData = $('#ajaxform').serializeArray();
         <button data-icon="delete">Cancel</button>
       </div>
         </form>
+  </div>
+    </div>
+<div data-role="page" id="viewData">
+	
+
+      <div data-role="header">
+    <h1>MX Security</h1>
+    <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" onclick="history.back();">Button</a><a href="#popupUpdate"  data-icon="edit" data-iconpos="left" data-rel="popup" data-position-to="window" data-transition="pop">Update</a> </div>
+      <div data-role="content">
+    <div data-role="popup" id="popupUpdate" class="ui-corner-all" data-theme="a">  
+          <div style="padding:10px 20px;padding-top:0px">             
+        <center><h3 style="margin-top:0px" >Update Status</h3></center>
+        <select name="status" id="status">
+              <option value="">Select Status</option>
+              <option value="Lynx" >Lynx</option>
+              <option value="Simon" >Simon</option>
+              <option value="2gig">2gig</option>
+            </select>
+        <input type="button" data-icon="edit" onclick="updateStatus()" value="Submit" />
+      </div>
+        </div>
+    <form name="updateform" id="updateform" action="#" method="POST">
+          <div data-role="fieldcontain">
+       	<input type="hidden" name="dataid" id="dataidv" value="" />
+        <input type="text" name="name" id="namev"  value="" placeholder="Enter Name"  data-clear-btn="true" readonly/>
+        <input type="tel" name="tel" id="telv" value="" placeholder="Enter Tel"  data-clear-btn="true"  readonly/>
+        <textarea name="address" id="addressv" placeholder="Enter Address" readonly></textarea>
+        <input type="text" name="city" id="cityv"  value="" placeholder="Enter City"  data-clear-btn="true" readonly/>
+        <input type="tel" name="zip" id="zipv" value="" placeholder="Enter Zip"  data-clear-btn="true"  readonly/>
+        <input type="email" name="email" id="emailv"  value="" placeholder="Enter Email"  data-clear-btn="true" readonly/>
+        <select name="interestv" id="interestv" disabled>
+              <option value="">Select Interest</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+        <select name="havev" id="havev" disabled>
+              <option value="">Have System</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+        <input type="text" onfocus="(this.type='number')"  onblur="(this.type='text')" name="rate" id="ratev" value="" placeholder="Enter Rate"  data-clear-btn="true"  readonly/>
+        <select name="systemv" id="systemv" disabled>
+              <option value="">System Quoted</option>
+              <option value="Lynx" >Lynx</option>
+              <option value="Simon" >Simon</option>
+              <option value="2gig">2gig</option>
+              <option value="DSC" >DSC</option>
+              <option value="Hardwired" >Hardwired</option>
+            </select>
+        <input type="text" name="cdate" id="cdatev" value="" placeholder="Enter Next Contact Date"  data-clear-btn="true"  readonly/>
+      </div>
+        </form>
+  </div>
+      <div data-role="footer">
+    <h4>MX Security Lead Program</h4>
   </div>
     </div>
 <script type="text/javascript" src="cordova.js"></script>
