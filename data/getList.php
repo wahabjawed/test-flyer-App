@@ -8,16 +8,23 @@ header('Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 		$user = $_GET['user'];
 		
 			
-					$query = "select * from data  where datauserid  = '$user'";
+					$query = "select data_id,name,date_format(date(ddate),'%b %d %Y') as `dddate` from data  where datauserid  = '$user' order by ddate";
 			$result = mysqli_query($con,$query)
 			or die ("Couldn’t execute query.");
 
 			
 					$data="";
-			while($row=mysqli_fetch_array($result))
-			{
-			$data = $data.",".$row['data_id']."#".$row['name'];
+					$ddate="";
+		while($row=mysqli_fetch_array($result))
+		{
+			
+			if($row['dddate']==$ddate){
+				$data = $data.",".$row['data_id']."#".$row['name'];
+			}else{		
+				$data = $data."^".$row['dddate'].",".$row['data_id']."#".$row['name'];
+				$ddate=$row['dddate'];
 			}
+		}
 			
 			echo "$data";
 ?>
